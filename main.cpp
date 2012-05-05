@@ -30,17 +30,24 @@ private:
 
     QSize m_size;
 
+    int m_stride;
+
     QOpenGLBuffer *m_pbos[2];
 };
 
-Recorder::Recorder(const QString &, const QString &)
+Recorder::Recorder(const QString &, const QString &specs)
     : m_prefix("/tmp/" + qApp->applicationName() + "-" + QString::number(quint64(getpid())) + "/")
     , m_view(0)
     , m_frame(0)
+    , m_stride(1)
 {
     qApp->installEventFilter(this);
     qDebug() << "Recorder initialized:" << QDir().mkpath(m_prefix);
 
+    bool ok;
+    int stride = specs.toInt(&ok);
+    if (ok)
+        m_stride = stride;
     m_pbos[0] = m_pbos[1] = 0;
 }
 
@@ -82,6 +89,11 @@ void storeFrame(QImage *image, int frame, const QString &prefix)
 
 void Recorder::grabFrame()
 {
+    if (((m_frame - 1) % m_stride) != 0) {
+        ++m_frame;
+        return;
+    }
+
     QImage *image = new QImage(m_size, QImage::Format_ARGB32_Premultiplied);
 
     if (m_view->size() != m_size) {
