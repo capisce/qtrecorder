@@ -1,0 +1,11 @@
+Plugin for recording Qt applications
+
+To use it, launch apps with -plugin recorder
+
+If recording is slow, try recording only every N frames, by using
+-plugin recorder:N, for example -plugin recorder:2.
+
+Only the first window that receives focus will be recorded, and only
+QQuickViews are supported currently.
+
+The images are stored in /tmp/appname-pid/
