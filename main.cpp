@@ -1,4 +1,4 @@
-#include <qgenericplugin_qpa.h>
+#include <qgenericplugin.h>
 
 #include <QDir>
 #include <QGuiApplication>

@@ -1,11 +1,11 @@
 TARGET = recorderplugin
+
+PLUGIN_TYPE = generic
+PLUGIN_CLASS_NAME = RecorderPlugin
+
 load(qt_plugin)
 
-DESTDIR = $$QT.gui.plugins/generic
-target.path = $$[QT_INSTALL_PLUGINS]/generic
-INSTALLS += target
-
-QT += quick core-private platformsupport-private concurrent
+QT += quick core-private gui-private platformsupport-private concurrent
 
 SOURCES = main.cpp
 
