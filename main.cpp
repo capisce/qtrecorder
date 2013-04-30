@@ -31,6 +31,9 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
+#include <sys/types.h>
+#include <unistd.h>
+
 class Recorder : public QObject
 {
     Q_OBJECT
